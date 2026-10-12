@@ -1,33 +1,21 @@
-﻿namespace Bookify.Domain.Apartments
+﻿using Bookify.Domain.Abstractions;
+
+namespace Bookify.Domain.Apartments
 {
-    internal sealed class Apartment
+    internal sealed class Apartment(Guid id) : Entity(id)
     {
-        public Guid Id;
+        public string Name { get; private set; }
 
-        public string Name;
+        public string Description { get; private set; }
 
-        public string Description;
+        public Address Address { get; private set; }
 
-        public string Country;
+        public Money Price { get; private set; }
 
-        public string State;
+        public Money CleaningFee { get; private set; }
 
-        public string ZipCode;
+        public DateTime? LastBookedOnUtc { get; private set; }
 
-        public string City;
-
-        public string Street;
-
-        public decimal PriceAmount;
-
-        public string PriceCurrency;
-
-        public decimal CleaningFeeAmount;
-
-        public string CleaningFeeCurrency;
-
-        public DateTime? LastBookedOnUtc;
-
-        public List<Amenity> Amenities;
+        public List<Amenity> Amenities { get; private set; }
     }
 }
