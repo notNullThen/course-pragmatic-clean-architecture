@@ -1,4 +1,3 @@
-﻿namespace Bookify.Domain.Users
-{
-    internal record FirstName(string Value);
-}
+﻿namespace Bookify.Domain.Users;
+
+internal record FirstName(string Value);

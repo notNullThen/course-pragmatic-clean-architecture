@@ -1,16 +1,15 @@
-﻿namespace Bookify.Domain.Apartments
+﻿namespace Bookify.Domain.Apartments;
+
+internal enum Amenity
 {
-    internal enum Amenity
-    {
-        WiFi,
-        AirConditioning,
-        Parking,
-        PetFriendly,
-        SwimmingPool,
-        Gym,
-        Spa,
-        Terrace,
-        MountainView,
-        GardenView,
-    }
+    WiFi,
+    AirConditioning,
+    Parking,
+    PetFriendly,
+    SwimmingPool,
+    Gym,
+    Spa,
+    Terrace,
+    MountainView,
+    GardenView,
 }
