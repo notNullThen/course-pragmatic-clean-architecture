@@ -1,4 +1,5 @@
 ﻿using Bookify.Domain.Abstractions;
+using Bookify.Domain.Users.Events;
 
 namespace Bookify.Domain.Users;
 
@@ -16,5 +17,11 @@ internal sealed class User : Entity
     public Email Email { get; private set; }
 
     public static User Create(Guid id, FirstName firstName, LastName lastName, Email email)
-        => new(id, firstName, lastName, email);
+    {
+        var user = new User(id, firstName, lastName, email);
+
+        user.RaiseDomainEvent(new UserCreatedDomainEvent(id));
+
+        return user;
+    }
 }

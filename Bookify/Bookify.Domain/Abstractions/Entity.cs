@@ -2,5 +2,13 @@
 
 internal abstract class Entity(Guid id)
 {
+    private readonly List<IDomainEvent> _domainEvents = [];
+
     public Guid Id => id;
+
+    public IReadOnlyList<IDomainEvent> GetDomainEvents() => _domainEvents.AsReadOnly();
+
+    public void ClearDomainEvents() => _domainEvents.Clear();
+
+    protected void RaiseDomainEvent(IDomainEvent domainEvent) => _domainEvents.Add(domainEvent);
 }
