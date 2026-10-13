@@ -1,6 +1,6 @@
 ﻿using Bookify.Domain.Abstractions;
+using Bookify.Domain.Apartments;
 using Bookify.Domain.Bookings.Events;
-using Bookify.Domain.Shared;
 
 namespace Bookify.Domain.Bookings;
 
@@ -11,10 +11,7 @@ internal sealed class Booking : Entity
         Guid apartmentId,
         Guid userId,
         DateRange duration,
-        Money priceForPeriod,
-        Money cleaningFee,
-        Money amenitiesUpCharge,
-        Money totalPrice,
+        PricingDetails pricingDetails,
         BookingStatus status,
         DateTime createdOnUtc)
         : base(id)
@@ -22,10 +19,7 @@ internal sealed class Booking : Entity
         ApartmentId = apartmentId;
         UserId = userId;
         Duration = duration;
-        PriceForPeriod = priceForPeriod;
-        CleaningFee = cleaningFee;
-        AmenitiesUpCharge = amenitiesUpCharge;
-        TotalPrice = totalPrice;
+        PricingDetails = pricingDetails;
         Status = status;
         CreatedOnUtc = createdOnUtc;
     }
@@ -36,13 +30,7 @@ internal sealed class Booking : Entity
 
     public DateRange Duration { get; private set; }
 
-    public Money PriceForPeriod { get; private set; }
-
-    public Money CleaningFee { get; private set; }
-
-    public Money AmenitiesUpCharge { get; private set; }
-
-    public Money TotalPrice { get; private set; }
+    public PricingDetails PricingDetails { get; private set; }
 
     public BookingStatus Status { get; private set; }
 
@@ -57,25 +45,26 @@ internal sealed class Booking : Entity
     public DateTime? CancelledOnUtc { get; private set; }
 
     public static Booking Reserve(
-        Guid apartmentId,
+        Apartment apartment,
         Guid userId,
         DateRange duration,
         DateTime utcNow,
-        PricingDetails pricingDetails)
+        PricingService pricingService)
     {
+        var pricingDetails = pricingService.CalculatePrice(apartment, duration);
+
         var booking = new Booking(
             id: Guid.NewGuid(),
-            apartmentId: apartmentId,
+            apartmentId: apartment.Id,
             userId: userId,
             duration: duration,
-            priceForPeriod: pricingDetails.PriceForPeriod,
-            cleaningFee: pricingDetails.CleaningFee,
-            amenitiesUpCharge: pricingDetails.AmenitiesUpCharge,
-            totalPrice: pricingDetails.TotalPrice,
+            pricingDetails: pricingDetails,
             status: BookingStatus.Reserved,
             createdOnUtc: utcNow);
 
         booking.RaiseDomainEvent(new BookingReservedDomainEvent(booking.Id));
+
+        apartment.LastBookedOnUtc = utcNow;
 
         return booking;
     }
