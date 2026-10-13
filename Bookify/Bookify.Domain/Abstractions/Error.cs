@@ -2,7 +2,7 @@
 
 internal record Error(string Code, string Name)
 {
-    public static Error None = new(string.Empty, string.Empty);
+    internal static Error None = new(string.Empty, string.Empty);
 
-    public static Error NullValue = new("Error.NullValue", "Null value was provided");
+    internal static Error NullValue = new("Error.NullValue", "Null value was provided");
 }

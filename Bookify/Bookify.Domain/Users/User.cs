@@ -12,11 +12,11 @@ internal sealed class User : Entity
         Email = email;
     }
 
-    public FirstName FirstName { get; private set; }
-    public LastName LastName { get; private set; }
-    public Email Email { get; private set; }
+    internal FirstName FirstName { get; private set; }
+    internal LastName LastName { get; private set; }
+    internal Email Email { get; private set; }
 
-    public static User Create(Guid id, FirstName firstName, LastName lastName, Email email)
+    internal static User Create(Guid id, FirstName firstName, LastName lastName, Email email)
     {
         var user = new User(id, firstName, lastName, email);
 

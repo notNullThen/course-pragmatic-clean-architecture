@@ -24,27 +24,27 @@ internal sealed class Booking : Entity
         CreatedOnUtc = createdOnUtc;
     }
 
-    public Guid ApartmentId { get; private set; }
+    internal Guid ApartmentId { get; private set; }
 
-    public Guid UserId { get; private set; }
+    internal Guid UserId { get; private set; }
 
-    public DateRange Duration { get; private set; }
+    internal DateRange Duration { get; private set; }
 
-    public PricingDetails PricingDetails { get; private set; }
+    internal PricingDetails PricingDetails { get; private set; }
 
-    public BookingStatus Status { get; private set; }
+    internal BookingStatus Status { get; private set; }
 
-    public DateTime CreatedOnUtc { get; private set; }
+    internal DateTime CreatedOnUtc { get; private set; }
 
-    public DateTime? ConfirmedOnUtc { get; private set; }
+    internal DateTime? ConfirmedOnUtc { get; private set; }
 
-    public DateTime? RejectedOnUtc { get; private set; }
+    internal DateTime? RejectedOnUtc { get; private set; }
 
-    public DateTime? CompletedOnUtc { get; private set; }
+    internal DateTime? CompletedOnUtc { get; private set; }
 
-    public DateTime? CancelledOnUtc { get; private set; }
+    internal DateTime? CancelledOnUtc { get; private set; }
 
-    public static Booking Reserve(
+    internal static Booking Reserve(
         Apartment apartment,
         Guid userId,
         DateRange duration,
@@ -69,7 +69,7 @@ internal sealed class Booking : Entity
         return booking;
     }
 
-    public Result Confirm(DateTime utcNow)
+    internal Result Confirm(DateTime utcNow)
     {
         if (Status != BookingStatus.Reserved)
         {
@@ -84,7 +84,7 @@ internal sealed class Booking : Entity
         return Result.Success();
     }
 
-    public Result Reject(DateTime utcNow)
+    internal Result Reject(DateTime utcNow)
     {
         if (Status != BookingStatus.Reserved)
         {
@@ -99,7 +99,7 @@ internal sealed class Booking : Entity
         return Result.Success();
     }
 
-    public Result Complete(DateTime utcNow)
+    internal Result Complete(DateTime utcNow)
     {
         if (Status != BookingStatus.Confirmed)
         {
@@ -114,7 +114,7 @@ internal sealed class Booking : Entity
         return Result.Success();
     }
 
-    public Result Cancel(DateTime utcNow)
+    internal Result Cancel(DateTime utcNow)
     {
         if (Status != BookingStatus.Confirmed)
         {

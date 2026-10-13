@@ -20,21 +20,21 @@ internal class Result
         Error = error;
     }
 
-    public bool IsSuccess { get; }
+    internal bool IsSuccess { get; }
 
-    public bool IsFailure => !IsSuccess;
+    internal bool IsFailure => !IsSuccess;
 
-    public Error Error { get; }
+    internal Error Error { get; }
 
-    public static Result Success() => new(true, Error.None);
+    internal static Result Success() => new(true, Error.None);
 
-    public static Result Failure(Error error) => new(false, error);
+    internal static Result Failure(Error error) => new(false, error);
 
-    public static Result<TValue> Success<TValue>(TValue value) => new(value, true, Error.None);
+    internal static Result<TValue> Success<TValue>(TValue value) => new(value, true, Error.None);
 
-    public static Result<TValue> Failure<TValue>(Error error) => new(default, false, error);
+    internal static Result<TValue> Failure<TValue>(Error error) => new(default, false, error);
 
-    public static Result<TValue> Create<TValue>(TValue? value) =>
+    internal static Result<TValue> Create<TValue>(TValue? value) =>
         value is not null ? Success(value) : Failure<TValue>(Error.NullValue);
 }
 
@@ -49,7 +49,7 @@ internal class Result<TValue> : Result
     }
 
     [NotNull]
-    public TValue Value => IsSuccess ? _value! : throw new InvalidOperationException("The value of a failure can not be accessed");
+    internal TValue Value => IsSuccess ? _value! : throw new InvalidOperationException("The value of a failure can not be accessed");
 
     public static implicit operator Result<TValue>(TValue? value) => Create(value);
 }
