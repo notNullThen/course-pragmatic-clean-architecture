@@ -2,6 +2,4 @@
 
 namespace Bookify.Domain.Abstractions;
 
-internal interface IDomainEvent : INotification
-{
-}
+internal interface IDomainEvent : INotification;
