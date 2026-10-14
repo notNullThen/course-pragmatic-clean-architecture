@@ -3,7 +3,7 @@ using Bookify.Domain.Shared;
 
 namespace Bookify.Domain.Apartments;
 
-internal sealed class Apartment(
+public sealed class Apartment(
     Guid id,
     Name name,
     Description description,
@@ -14,17 +14,17 @@ internal sealed class Apartment(
     List<Amenity> amenities)
     : Entity(id)
 {
-    internal Name Name { get; private set; } = name;
+    public Name Name { get; private set; } = name;
 
-    internal Description Description { get; private set; } = description;
+    public Description Description { get; private set; } = description;
 
-    internal Address Address { get; private set; } = address;
+    public Address Address { get; private set; } = address;
 
-    internal Money Price { get; private set; } = price;
+    public Money Price { get; private set; } = price;
 
-    internal Money CleaningFee { get; private set; } = cleaningFee;
+    public Money CleaningFee { get; private set; } = cleaningFee;
 
-    internal DateTime? LastBookedOnUtc { get; set; } = lastBookedOnUtc;
+    public DateTime? LastBookedOnUtc { get; set; } = lastBookedOnUtc;
 
-    internal List<Amenity> Amenities { get; private set; } = amenities;
+    public List<Amenity> Amenities { get; private set; } = amenities;
 }

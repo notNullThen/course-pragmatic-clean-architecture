@@ -1,16 +1,16 @@
 ﻿namespace Bookify.Domain.Bookings;
 
-internal record DateRange
+public record DateRange
 {
     private DateRange() { }
 
-    internal DateOnly Start { get; init; }
+    public DateOnly Start { get; init; }
 
-    internal DateOnly End { get; init; }
+    public DateOnly End { get; init; }
 
-    internal int LengthInDays => End.DayNumber - Start.DayNumber;
+    public int LengthInDays => End.DayNumber - Start.DayNumber;
 
-    internal static DateRange Create(DateOnly start, DateOnly end)
+    public static DateRange Create(DateOnly start, DateOnly end)
     {
         if (start > end)
         {

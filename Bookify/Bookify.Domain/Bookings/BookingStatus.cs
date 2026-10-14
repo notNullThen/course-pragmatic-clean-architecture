@@ -1,6 +1,6 @@
 ﻿namespace Bookify.Domain.Bookings;
 
-internal enum BookingStatus
+public enum BookingStatus
 {
     Reserved,
     Confirmed,

@@ -1,3 +1,3 @@
 ﻿namespace Bookify.Domain.Users;
 
-internal record LastName(string Value);
+public record LastName(string Value);
