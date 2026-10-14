@@ -2,7 +2,7 @@
 
 namespace Bookify.Domain.Abstractions;
 
-internal class Result
+public class Result
 {
     protected internal Result(bool isSuccess, Error error)
     {
@@ -38,7 +38,7 @@ internal class Result
         value is not null ? Success(value) : Failure<TValue>(Error.NullValue);
 }
 
-internal class Result<TValue> : Result
+public class Result<TValue> : Result
 {
     private readonly TValue? _value;
 
