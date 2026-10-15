@@ -16,7 +16,9 @@ internal sealed class BookingResponse
 
     public decimal CleaningFeeAmount { get; init; }
 
-    public string AmenitiesUpChargeAmount { get; init; }
+    public string CleaningFeeCurrency { get; init; }
+
+    public decimal AmenitiesUpChargeAmount { get; init; }
 
     public string AmenitiesUpChargeCurrency { get; init; }
 
