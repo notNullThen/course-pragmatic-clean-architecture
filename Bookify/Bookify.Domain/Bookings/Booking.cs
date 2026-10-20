@@ -1,6 +1,7 @@
 ﻿using Bookify.Domain.Abstractions;
 using Bookify.Domain.Apartments;
 using Bookify.Domain.Bookings.Events;
+using Bookify.Domain.Shared;
 
 namespace Bookify.Domain.Bookings;
 
@@ -11,7 +12,10 @@ public sealed class Booking : Entity
         Guid apartmentId,
         Guid userId,
         DateRange duration,
-        PricingDetails pricingDetails,
+        Money priceForPeriod,
+        Money cleaningFee,
+        Money amenitiesUpCharge,
+        Money totalPrice,
         BookingStatus status,
         DateTime createdOnUtc)
         : base(id)
@@ -19,7 +23,10 @@ public sealed class Booking : Entity
         ApartmentId = apartmentId;
         UserId = userId;
         Duration = duration;
-        PricingDetails = pricingDetails;
+        PriceForPeriod = priceForPeriod;
+        CleaningFee = cleaningFee;
+        AmenitiesUpCharge = amenitiesUpCharge;
+        TotalPrice = totalPrice;
         Status = status;
         CreatedOnUtc = createdOnUtc;
     }
@@ -30,7 +37,13 @@ public sealed class Booking : Entity
 
     public DateRange Duration { get; private set; }
 
-    public PricingDetails PricingDetails { get; private set; }
+    public Money PriceForPeriod { get; private set; }
+
+    public Money CleaningFee { get; private set; }
+
+    public Money AmenitiesUpCharge { get; private set; }
+
+    public Money TotalPrice { get; private set; }
 
     public BookingStatus Status { get; private set; }
 
@@ -58,7 +71,10 @@ public sealed class Booking : Entity
             apartmentId: apartment.Id,
             userId: userId,
             duration: duration,
-            pricingDetails: pricingDetails,
+            priceForPeriod: pricingDetails.PriceForPeriod,
+            cleaningFee: pricingDetails.CleaningFee,
+            amenitiesUpCharge: pricingDetails.AmenitiesUpCharge,
+            totalPrice: pricingDetails.TotalPrice,
             status: BookingStatus.Reserved,
             createdOnUtc: utcNow);
 
