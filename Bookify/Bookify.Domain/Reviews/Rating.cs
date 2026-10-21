@@ -2,15 +2,15 @@
 
 namespace Bookify.Domain.Reviews;
 
-internal sealed record Rating
+public sealed record Rating
 {
-    internal static readonly Error Invalid = new("Rating.Invalid", "The rating is invalid");
+    public static readonly Error Invalid = new("Rating.Invalid", "The rating is invalid");
 
     private Rating(int value) => Value = value;
 
-    internal int Value { get; init; }
+    public int Value { get; init; }
 
-    internal static Result<Rating> Create(int value)
+    public static Result<Rating> Create(int value)
     {
         if (value < 1 || value > 5)
         {

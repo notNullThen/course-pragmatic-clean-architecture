@@ -4,7 +4,7 @@ using Bookify.Domain.Reviews.Events;
 
 namespace Bookify.Domain.Reviews;
 
-internal sealed class Review : Entity
+public sealed class Review : Entity
 {
     private Review(
         Guid id,
@@ -24,19 +24,19 @@ internal sealed class Review : Entity
         CreatedOnUtc = createdOnUtc;
     }
 
-    internal Guid ApartmentId { get; private set; }
+    public Guid ApartmentId { get; private set; }
 
-    internal Guid BookingId { get; private set; }
+    public Guid BookingId { get; private set; }
 
-    internal Guid UserId { get; private set; }
+    public Guid UserId { get; private set; }
 
-    internal Rating Rating { get; private set; }
+    public Rating Rating { get; private set; }
 
-    internal Comment Comment { get; private set; }
+    public Comment Comment { get; private set; }
 
-    internal DateTime CreatedOnUtc { get; private set; }
+    public DateTime CreatedOnUtc { get; private set; }
 
-    internal static Result<Review> Create(
+    public static Result<Review> Create(
         Booking booking,
         Rating rating,
         Comment comment,
